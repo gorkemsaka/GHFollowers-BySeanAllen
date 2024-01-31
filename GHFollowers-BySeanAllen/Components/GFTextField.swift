@@ -34,6 +34,8 @@ class GFTextField: UITextField {
         minimumFontSize = Theme.GFTextField.minimumFontSize.rawValue
         backgroundColor = .tertiarySystemBackground
         autocorrectionType = .no
+        keyboardType = .namePhonePad
+        returnKeyType = .go 
         
         placeholder = Theme.AppTitle.textFieldPlaceHolder.rawValue
     }

@@ -12,6 +12,11 @@ struct Theme {
         case searchBarTitle = "Search"
         case favoriteBarTitle = "Favorite"
         case textFieldPlaceHolder = "Enter a username"
+        case getFollowersButton = "Get Followers"
+        case alertButtonTitle = "Ok"
+        case alertTitle = "Empty Username"
+        case bodyTitle = "Please enter a username. Wee need to know who to look for 😁."
+        
     }
     enum Size: CGFloat {
         case cornerRadius = 10

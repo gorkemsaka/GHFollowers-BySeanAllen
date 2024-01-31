@@ -9,7 +9,6 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
     //MARK: - UI Elements
-
     //MARK: - Properties
     
     
@@ -21,7 +20,9 @@ class FavoritesViewController: UIViewController {
     
     //MARK: - Functions
     private func configure(){
-        view.backgroundColor = .systemGray4
+        view.backgroundColor = .systemBackground
     }
 
 }
+
+
