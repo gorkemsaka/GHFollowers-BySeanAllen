@@ -14,9 +14,14 @@ struct Theme {
         case textFieldPlaceHolder = "Enter a username"
         case getFollowersButton = "Get Followers"
         case alertButtonTitle = "Ok"
+    }
+    enum ErrorMessages: String{
         case alertTitle = "Empty Username"
-        case bodyTitle = "Please enter a username. Wee need to know who to look for 😁."
-        
+        case alertBodyTitle = "Please enter a username. We need to know who to look for 😁."
+        case urlErrorTitle = "This username created an invalid request. Please try again."
+        case requestErrorTitle = "Unable to complete your request. Please check your internet connection"
+        case responseErrorTtitle = "Invalid response from the server. Please try again."
+        case dataErrorTitle = "The data received from the server was invalid. Please try again."
     }
     enum Size: CGFloat {
         case cornerRadius = 10

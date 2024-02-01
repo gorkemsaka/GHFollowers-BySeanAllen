@@ -19,11 +19,29 @@ class FollowersListViewController: UIViewController {
         configure()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
     //MARK: - Functions
     private func configure(){
         view.backgroundColor = .systemBackground
-        navigationController?.isNavigationBarHidden = false
         // new navigationTitle style
         navigationController?.navigationBar.prefersLargeTitles = true
+        fetchFollowers()
+    }
+}
+
+extension FollowersListViewController {
+    private func fetchFollowers(){
+        NetworkManager.shared.getFollowers(username: username, page: 1) { followersList, errorMessage in
+            guard let followersList = followersList else {
+                self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", bodyTitle: errorMessage!.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
+                return
+            }
+            print("Followers.count = \(followersList.count)")
+            print(followersList)
+        }
     }
 }

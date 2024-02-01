@@ -30,7 +30,7 @@ class SearchViewController: UIViewController {
     // Everytime the view appear, this func will work
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     //MARK: - Functions
@@ -52,7 +52,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     @objc func pushFollowersListVC(){
         guard isUsernameEntered else {
-            presentGFAlertOnMainThread(title: Theme.AppTitle.alertTitle.rawValue, bodyTitle: Theme.AppTitle.bodyTitle.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
+            presentGFAlertOnMainThread(title: Theme.ErrorMessages.alertTitle.rawValue, bodyTitle: Theme.ErrorMessages.alertBodyTitle.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
             return
         }
         let followersListVC = FollowersListViewController()
