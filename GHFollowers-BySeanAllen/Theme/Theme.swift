@@ -15,13 +15,16 @@ struct Theme {
         case getFollowersButton = "Get Followers"
         case alertButtonTitle = "Ok"
     }
-    enum ErrorMessages: String{
+    enum GFError: String, Error{
         case alertTitle = "Empty Username"
         case alertBodyTitle = "Please enter a username. We need to know who to look for 😁."
         case urlErrorTitle = "This username created an invalid request. Please try again."
         case requestErrorTitle = "Unable to complete your request. Please check your internet connection"
         case responseErrorTtitle = "Invalid response from the server. Please try again."
         case dataErrorTitle = "The data received from the server was invalid. Please try again."
+    }
+    enum Identifier: String {
+        case followerCellID = "FollowerCell"
     }
     enum Size: CGFloat {
         case cornerRadius = 10

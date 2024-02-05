@@ -9,6 +9,7 @@ import UIKit
 
 class FollowersListViewController: UIViewController {
     //MARK: - UI Elements
+    var collectionView: UICollectionView!
     
     //MARK: - Properties
     var username: String!
@@ -30,18 +31,31 @@ class FollowersListViewController: UIViewController {
         // new navigationTitle style
         navigationController?.navigationBar.prefersLargeTitles = true
         fetchFollowers()
+        configureCollectionView()
     }
 }
 
+//MARK: - Fetch Data
 extension FollowersListViewController {
     private func fetchFollowers(){
-        NetworkManager.shared.getFollowers(username: username, page: 1) { followersList, errorMessage in
-            guard let followersList = followersList else {
-                self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", bodyTitle: errorMessage!.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
-                return
+        NetworkManager.shared.getFollowers(username: username, page: 1) { (result) in
+            switch result {
+            case .success(let followersList):
+                print(followersList)
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", bodyTitle: error.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
             }
-            print("Followers.count = \(followersList.count)")
-            print(followersList)
         }
+    }
+}
+
+//MARK: - Configure Collection View
+extension FollowersListViewController {
+    private func configureCollectionView(){
+        //collectionView expand whole screen(frame: view.bounds)
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewLayout())
+        view.addSubview(collectionView)
+        collectionView.backgroundColor = .systemPink
+        collectionView.register(FollowersCollectionViewCell.self, forCellWithReuseIdentifier: Theme.Identifier.followerCellID.rawValue)
     }
 }

@@ -35,7 +35,7 @@ class GFTextField: UITextField {
         backgroundColor = .tertiarySystemBackground
         autocorrectionType = .no
         keyboardType = .namePhonePad
-        returnKeyType = .go 
+        returnKeyType = .go
         
         placeholder = Theme.AppTitle.textFieldPlaceHolder.rawValue
     }

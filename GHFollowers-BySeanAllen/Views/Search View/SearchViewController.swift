@@ -52,7 +52,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     @objc func pushFollowersListVC(){
         guard isUsernameEntered else {
-            presentGFAlertOnMainThread(title: Theme.ErrorMessages.alertTitle.rawValue, bodyTitle: Theme.ErrorMessages.alertBodyTitle.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
+            presentGFAlertOnMainThread(title: Theme.GFError.alertTitle.rawValue, bodyTitle: Theme.GFError.alertBodyTitle.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
             return
         }
         let followersListVC = FollowersListViewController()
@@ -82,7 +82,6 @@ extension SearchViewController {
             logoImageView.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
-    
     private func configureUserNameTextfield(){
         view.addSubview(userNameTextField)
         userNameTextField.delegate = self
@@ -93,7 +92,6 @@ extension SearchViewController {
             userNameTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-    
     private func configureGetFollowersButton(){
         view.addSubview(actionButton)
         actionButton.addTarget(self, action: #selector(pushFollowersListVC), for: .touchUpInside)
