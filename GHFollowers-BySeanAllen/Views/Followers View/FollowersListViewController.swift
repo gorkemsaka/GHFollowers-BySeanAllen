@@ -45,7 +45,8 @@ class FollowersListViewController: UIViewController {
 //MARK: - Fetch Data
 extension FollowersListViewController {
     private func fetchFollowers(){
-        NetworkManager.shared.getFollowers(username: username, page: 1) { (result) in
+        NetworkManager.shared.getFollowers(username: username, page: 1) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let followersList):
                 self.followersList = followersList
@@ -60,26 +61,12 @@ extension FollowersListViewController {
 //MARK: - Configure Collection View & CollectionView Data Source
 extension FollowersListViewController {
     private func configureCollectionView(){
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout()) //collectionView expand whole screen(frame: view.bounds)
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(view: view)) //collectionView expand whole screen(frame: view.bounds)
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowersCollectionViewCell.self, forCellWithReuseIdentifier: Theme.Identifier.followerCellID.rawValue)
     }
-    
-    private func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
-        let width = view.bounds.width         // total width of the screen
-        let padding: CGFloat = 12
-        let minimumItemSpacing: CGFloat = 10
-        let avaliableWidth = width - (padding * 2) - (minimumItemSpacing * 2)
-        let itemWidth = avaliableWidth / 3
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        // layout gonna be square +40 for label on the bottom
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-        return flowLayout
-    }
-    
+     
     // 4:50:20 - UICollectionView - Diffable Data Source by iOS Dev Interview Prep Sean Allen just in case
     private func configureDataSource(){
         dataSource = UICollectionViewDiffableDataSource<Section, Followers>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell in
@@ -94,7 +81,6 @@ extension FollowersListViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(followersList)
         DispatchQueue.main.async {
-            // there is some error. Handle that
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
     }

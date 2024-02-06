@@ -34,6 +34,7 @@ class FollowersCollectionViewCell: UICollectionViewCell {
 extension FollowersCollectionViewCell {
     func getData(model: Followers) {
         usernameLabel.text = model.login
+        avatarImageView.downloadImage(urlString: model.avatarUrl)
     }
 }
 

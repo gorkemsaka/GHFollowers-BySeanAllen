@@ -26,6 +26,7 @@
 		5043E1B52B6B947F00D81EAA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5043E1B42B6B947F00D81EAA /* User.swift */; };
 		5043E1B82B6BA60800D81EAA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5043E1B72B6BA60800D81EAA /* NetworkManager.swift */; };
 		507CBA802B6D1B8E008517AD /* FollowersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507CBA7F2B6D1B8E008517AD /* FollowersCollectionViewCell.swift */; };
+		5084321D2B72634900DA79CD /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084321C2B72634900DA79CD /* UIHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		5043E1B42B6B947F00D81EAA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5043E1B72B6BA60800D81EAA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		507CBA7F2B6D1B8E008517AD /* FollowersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersCollectionViewCell.swift; sourceTree = "<group>"; };
+		5084321C2B72634900DA79CD /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				502993FF2B6AB609001EDBFD /* UIViewController+Ext.swift */,
+				5084321C2B72634900DA79CD /* UIHelper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				5019EC1C2B69137B00BEAAEB /* AppDelegate.swift in Sources */,
 				502994002B6AB609001EDBFD /* UIViewController+Ext.swift in Sources */,
 				5019EC3E2B693BC200BEAAEB /* GFButton.swift in Sources */,
+				5084321D2B72634900DA79CD /* UIHelper.swift in Sources */,
 				501693612B712216004E2B1F /* GFAvatarImageView.swift in Sources */,
 				5019EC3B2B692F5E00BEAAEB /* Theme.swift in Sources */,
 				502993F72B6A6AB6001EDBFD /* FollowersListViewController.swift in Sources */,
