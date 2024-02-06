@@ -50,6 +50,7 @@ extension FollowersCollectionViewCell {
         ])
     }
     private func configureUsernameLabel(){
+        addSubview(usernameLabel)
         NSLayoutConstraint.activate([
             usernameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 12),
             usernameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
