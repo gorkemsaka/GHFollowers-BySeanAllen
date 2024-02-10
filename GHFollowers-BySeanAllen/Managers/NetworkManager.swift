@@ -15,7 +15,7 @@ class NetworkManager {
     
     private init(){}
     
-    func getFollowers(username: String, page: Int, completed: @escaping (Result<[Followers], Theme.GFError>) -> Void){
+    func fetchFollowers(username: String, page: Int, completed: @escaping (Result<[Followers], Theme.GFError>) -> Void){
         let endPoint = baseURL + "\(username)/followers?per_page=100&page=\(page)"
         
         guard let url = URL(string: endPoint) else {
