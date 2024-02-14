@@ -85,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				5019EC2F2B69138400BEAAEB /* Core */,
-				502993FA2B6A9A57001EDBFD /* GFBodyLabel.swift */,
 				5019EC392B692F5100BEAAEB /* Theme */,
 				502993FE2B6AB5BB001EDBFD /* Extensions */,
 				5019EC3C2B693B6D00BEAAEB /* Components */,
@@ -153,6 +152,7 @@
 		5019EC3C2B693B6D00BEAAEB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				502993FA2B6A9A57001EDBFD /* GFBodyLabel.swift */,
 				5019EC3D2B693BC200BEAAEB /* GFButton.swift */,
 				5019EC3F2B69439F00BEAAEB /* GFTextField.swift */,
 				502993F82B6A98FF001EDBFD /* GFTitleLabel.swift */,
