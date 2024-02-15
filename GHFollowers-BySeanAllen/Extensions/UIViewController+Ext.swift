@@ -14,11 +14,11 @@ extension UIViewController {
     //Alert
     func presentGFAlertOnMainThread(title: String, bodyTitle: String, buttonTitle: String){
         DispatchQueue.main.async {
-            let alertVC = GFAlertViewController(alertTitle: title, bodyTitle: bodyTitle, buttonTitle: buttonTitle)
-            alertVC.modalPresentationStyle = .overFullScreen
-            alertVC.modalTransitionStyle = .crossDissolve
-            self.present(alertVC, animated: true)
-        }
+                    let alertVC = GFAlertViewController(alertTitle: title, bodyTitle: bodyTitle, buttonTitle: buttonTitle)
+                    alertVC.modalPresentationStyle = .overFullScreen
+                    alertVC.modalTransitionStyle = .crossDissolve
+                    self.present(alertVC, animated: true)
+                }
     }
     
     // Start Activity Indicator
@@ -49,5 +49,11 @@ extension UIViewController {
             containerView.removeFromSuperview()
             containerView = nil
         }
+    }
+    
+    func showEmptyStateView(message: String, view: UIView) {
+        let emptyStateView = GFEmptyStateView(message: message)
+            emptyStateView.frame = view.bounds
+            view.addSubview(emptyStateView)
     }
 }

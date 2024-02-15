@@ -60,7 +60,7 @@ extension GFAlertViewController {
         ])
     }
     
-    func configureTitleLabel(){
+   private func configureTitleLabel(){
         containerView.addSubview(titleLabel)
         titleLabel.text = alertTitle ?? "Something went wrong"
         

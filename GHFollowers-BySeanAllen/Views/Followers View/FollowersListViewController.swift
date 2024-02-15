@@ -18,6 +18,7 @@ class FollowersListViewController: UIViewController {
     //MARK: - Properties
     var username: String!
     var followersList: [Followers] = []
+    var filteredFollowers: [Followers] = []
     var page = 1
     var hasMoreFollowers = true
     var dataSource: UICollectionViewDiffableDataSource <Section, Followers>!
@@ -40,8 +41,36 @@ class FollowersListViewController: UIViewController {
         configureCollectionView()
         configureDataSource()
         getFollowers(username: username, page: page)
+        configureSearchController()
     }
 }
+
+//MARK: - Search Controller
+extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    func configureSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search for a username"
+        searchController.obscuresBackgroundDuringPresentation = false  // when you click search bar, backgorund color won't change
+        searchController.searchBar.delegate = self
+        
+        navigationItem.searchController = searchController
+    }
+    
+    // everytime searchbar text got change
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        filteredFollowers = followersList.filter { $0.login.lowercased().contains(filter.lowercased()) } // check the login name if it contain whatever filter is, throw that into filteredFollowers
+        updateData(followersList: self.filteredFollowers)
+    }
+    
+    // cancel button click
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateData(followersList: self.followersList)
+    }
+    
+}
+    
 
 //MARK: - Fetch Data
 extension FollowersListViewController {
@@ -54,7 +83,15 @@ extension FollowersListViewController {
             case .success(let followers):
                 if followers.count < 100 { self.hasMoreFollowers = false } // customer has another 100 followers or not
                 self.followersList.append(contentsOf: followers)
-                self.updateData()
+                
+                if self.followersList.isEmpty {
+                    let message = "This user doesn't have any followers. Go Follow Them 😄"
+                    DispatchQueue.main.async { self.showEmptyStateView(message: message, view: self.view) } // using .view thats should be in main thread
+                    return
+                }
+                
+                self.updateData(followersList: self.followersList)
+                
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", bodyTitle: error.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
             }
@@ -81,7 +118,7 @@ extension FollowersListViewController {
         })
     }
     
-     func updateData(){
+    func updateData(followersList: [Followers]){
         var snapshot = NSDiffableDataSourceSnapshot<Section, Followers>()
         snapshot.appendSections([.main])
         snapshot.appendItems(followersList)
