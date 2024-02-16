@@ -22,6 +22,7 @@ class FollowersListViewController: UIViewController {
     var page = 1
     var hasMoreFollowers = true
     var dataSource: UICollectionViewDiffableDataSource <Section, Followers>!
+    var isSearching = false
     
     //MARK: - Life Cycyle
     override func viewDidLoad() {
@@ -45,7 +46,7 @@ class FollowersListViewController: UIViewController {
     }
 }
 
-//MARK: - Search Controller
+//MARK: - Search Controller & CollectionView didSelected
 extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func configureSearchController() {
         let searchController = UISearchController()
@@ -59,16 +60,33 @@ extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDeleg
     
     // everytime searchbar text got change
     func updateSearchResults(for searchController: UISearchController) {
-        guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+            updateData(followersList: self.followersList)
+            return
+        }
+        isSearching = true
         filteredFollowers = followersList.filter { $0.login.lowercased().contains(filter.lowercased()) } // check the login name if it contain whatever filter is, throw that into filteredFollowers
         updateData(followersList: self.filteredFollowers)
     }
     
     // cancel button click
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
         updateData(followersList: self.followersList)
     }
     
+    // CollectionView followers didSelect
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let activeList = isSearching ? filteredFollowers : followersList
+        let selectedFollower = activeList[indexPath.item]
+        
+        // creating NavigationBar for cancel button
+        let userInfoVC = UserInfoViewController()
+        userInfoVC.username = selectedFollower.login
+        let navController = UINavigationController(rootViewController: userInfoVC)
+        
+        present(navController, animated: true)      // presenting modally because i dont want to add to stack thats why didn't use navigationController
+    }
 }
     
 
