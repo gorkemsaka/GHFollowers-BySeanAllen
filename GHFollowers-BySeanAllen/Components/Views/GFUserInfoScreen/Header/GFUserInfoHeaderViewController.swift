@@ -52,7 +52,7 @@ extension GFUserInfoHeaderViewController {
         bioLabel.text = user.bio  ?? "No Bio Avaliable"
         bioLabel.numberOfLines = 3
         
-        locationImageView.image = UIImage(systemName: "mappin.and.ellipse")
+        locationImageView.image = UIImage(systemName: Theme.SFSymbols.location)
         locationImageView.tintColor = .secondaryLabel
     }
 }
@@ -97,7 +97,7 @@ extension GFUserInfoHeaderViewController {
             locationImageView.heightAnchor.constraint(equalToConstant: 20),
             
             locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor),
-            locationLabel.leadingAnchor.constraint(equalTo: locationImageView.trailingAnchor, constant: padding),
+            locationLabel.leadingAnchor.constraint(equalTo: locationImageView.trailingAnchor, constant: textImagePadding),
             locationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             locationLabel.heightAnchor.constraint(equalToConstant: 20),
             

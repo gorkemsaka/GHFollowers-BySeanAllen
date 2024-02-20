@@ -23,6 +23,13 @@ struct Theme {
         case responseErrorTtitle = "Invalid response from the server. Please try again."
         case dataErrorTitle = "The data received from the server was invalid. Please try again."
     }
+    enum SFSymbols{
+        static let location = "mappin.and.ellipse"
+        static let repos = "folder"
+        static let gist = "text.alignleft"
+        static let followers = "heart"
+        static let following = "person.2"
+    }
     enum Identifier: String {
         case followerCellID = "FollowerCell"
     }

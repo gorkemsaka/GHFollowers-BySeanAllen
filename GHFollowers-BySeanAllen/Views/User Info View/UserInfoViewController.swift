@@ -40,7 +40,11 @@ extension UserInfoViewController {
             
             switch result {
             case .success(let user) :
-                DispatchQueue.main.async { self.addVCToContainer(childVC: GFUserInfoHeaderViewController(user: user), containerView: self.headerView) }
+                DispatchQueue.main.async {
+                    self.addVCToContainer(childVC: GFUserInfoHeaderViewController(user: user), containerView: self.headerView)
+                    self.addVCToContainer(childVC: GFRepoItemVC(user: user), containerView: self.itemView1)
+                    self.addVCToContainer(childVC: GFFollowerItemVC(user: user), containerView: self.itemView2)
+                }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
             }
@@ -55,8 +59,6 @@ extension UserInfoViewController {
         view.addSubview(itemView1)
         view.addSubview(itemView2)
         
-        itemView1.backgroundColor = .systemPink
-        itemView2.backgroundColor = .systemBlue
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         itemView1.translatesAutoresizingMaskIntoConstraints = false
@@ -80,8 +82,6 @@ extension UserInfoViewController {
             itemView2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             itemView2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             itemView2.heightAnchor.constraint(equalToConstant: itemHeight),
-            
-            
         ])
     }
     

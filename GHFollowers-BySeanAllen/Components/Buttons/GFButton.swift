@@ -31,4 +31,9 @@ class GFButton: UIButton {
         setTitleColor(.white, for: .normal)
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
     }
+    
+    func setButton(backgroundColor : UIColor, title: String){
+        self.backgroundColor = backgroundColor
+        setTitle(title, for: .normal)
+    }
 }
