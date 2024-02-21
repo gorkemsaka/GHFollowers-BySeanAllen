@@ -30,6 +30,10 @@ struct Theme {
         static let followers = "heart"
         static let following = "person.2"
     }
+    enum GFItems: String {
+        case repoItem = "Github Profile"
+        case followerItem = "Get Followers"
+    }
     enum Identifier: String {
         case followerCellID = "FollowerCell"
     }

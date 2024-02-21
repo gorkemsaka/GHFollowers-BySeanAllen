@@ -17,6 +17,6 @@ class GFRepoItemVC: GFItemInfoViewController {
     private func configureItems(){
         itemInfoView1.setElements(itemInfoType: .repos, count: user.publicRepos)
         itemInfoView2.setElements(itemInfoType: .gists, count: user.publicGists)
-        actionButton.setButton(backgroundColor: .systemPurple, title: "Github Profile")
+        actionButton.setButton(backgroundColor: .systemPurple, title: Theme.GFItems.repoItem.rawValue )
     }
 }

@@ -13,6 +13,7 @@ class UserInfoViewController: UIViewController {
     let headerView = UIView()
     let itemView1 = UIView()
     let itemView2 = UIView()
+    let dateLabel = GFBodyLabel(textAlignment: .center)
     
     //MARK: - Properties
     var username: String!
@@ -44,6 +45,7 @@ extension UserInfoViewController {
                     self.addVCToContainer(childVC: GFUserInfoHeaderViewController(user: user), containerView: self.headerView)
                     self.addVCToContainer(childVC: GFRepoItemVC(user: user), containerView: self.itemView1)
                     self.addVCToContainer(childVC: GFFollowerItemVC(user: user), containerView: self.itemView2)
+                    self.dateLabel.text = "Github since \(user.createdAt.convertToDisplayFormat())"
                 }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
@@ -58,6 +60,7 @@ extension UserInfoViewController {
         view.addSubview(headerView)
         view.addSubview(itemView1)
         view.addSubview(itemView2)
+        view.addSubview(dateLabel)
         
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,6 +85,11 @@ extension UserInfoViewController {
             itemView2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             itemView2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             itemView2.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            dateLabel.topAnchor.constraint(equalTo: itemView2.bottomAnchor, constant: padding),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
     

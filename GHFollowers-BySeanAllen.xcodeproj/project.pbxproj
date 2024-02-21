@@ -35,6 +35,8 @@
 		509B48732B83597C00E37C38 /* GFSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509B48722B83597C00E37C38 /* GFSecondaryTitleLabel.swift */; };
 		509B48772B838D3800E37C38 /* GFItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509B48762B838D3800E37C38 /* GFItemInfoView.swift */; };
 		50A930052B817690003E6FCC /* GFUserInfoHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A930042B817690003E6FCC /* GFUserInfoHeaderViewController.swift */; };
+		50E122152B84E07D00E837CB /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E122142B84E07D00E837CB /* Date+Ext.swift */; };
+		50E122172B84E0B400E837CB /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E122162B84E0B400E837CB /* String+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		509B48722B83597C00E37C38 /* GFSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFSecondaryTitleLabel.swift; sourceTree = "<group>"; };
 		509B48762B838D3800E37C38 /* GFItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoView.swift; sourceTree = "<group>"; };
 		50A930042B817690003E6FCC /* GFUserInfoHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFUserInfoHeaderViewController.swift; sourceTree = "<group>"; };
+		50E122142B84E07D00E837CB /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		50E122162B84E0B400E837CB /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +195,8 @@
 			isa = PBXGroup;
 			children = (
 				502993FF2B6AB609001EDBFD /* UIViewController+Ext.swift */,
+				50E122142B84E07D00E837CB /* Date+Ext.swift */,
+				50E122162B84E0B400E837CB /* String+Ext.swift */,
 				5084321C2B72634900DA79CD /* UIHelper.swift */,
 			);
 			path = Extensions;
@@ -371,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50E122152B84E07D00E837CB /* Date+Ext.swift in Sources */,
 				50127F002B84AEF1005AEFB9 /* GFFollowerItemVC.swift in Sources */,
 				50127EFC2B849EEC005AEFB9 /* GFItemInfoViewController.swift in Sources */,
 				507CBA802B6D1B8E008517AD /* FollowersCollectionViewCell.swift in Sources */,
@@ -392,6 +399,7 @@
 				502993F92B6A98FF001EDBFD /* GFTitleLabel.swift in Sources */,
 				509B48732B83597C00E37C38 /* GFSecondaryTitleLabel.swift in Sources */,
 				50621B312B7E446500227B23 /* GFEmptyStateView.swift in Sources */,
+				50E122172B84E0B400E837CB /* String+Ext.swift in Sources */,
 				5019EC1E2B69137B00BEAAEB /* SceneDelegate.swift in Sources */,
 				5043E1B82B6BA60800D81EAA /* NetworkManager.swift in Sources */,
 				507896E72B7FA39E00F56163 /* UserInfoViewController.swift in Sources */,
