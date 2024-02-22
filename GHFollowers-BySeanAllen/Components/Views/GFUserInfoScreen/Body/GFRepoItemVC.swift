@@ -19,4 +19,8 @@ class GFRepoItemVC: GFItemInfoViewController {
         itemInfoView2.setElements(itemInfoType: .gists, count: user.publicGists)
         actionButton.setButton(backgroundColor: .systemPurple, title: Theme.GFItems.repoItem.rawValue )
     }
+    
+    override func actionButtonTapped() {
+        delegate.didTapGithubProfile(user: user)
+    }
 }

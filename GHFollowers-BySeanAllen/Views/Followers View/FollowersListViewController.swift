@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FollowerListVCDelegate: class {
+    func didRequestFollowers(username: String)
+}
+
 class FollowersListViewController: UIViewController {
     //MARK: - Section for snapshot
     enum Section {
@@ -83,12 +87,13 @@ extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDeleg
         // creating NavigationBar for cancel button
         let userInfoVC = UserInfoViewController()
         userInfoVC.username = selectedFollower.login
+        userInfoVC.delegate = self
         let navController = UINavigationController(rootViewController: userInfoVC)
         
         present(navController, animated: true)      // presenting modally because i dont want to add to stack thats why didn't use navigationController
     }
 }
-    
+
 
 //MARK: - Fetch Data
 extension FollowersListViewController {
@@ -118,6 +123,19 @@ extension FollowersListViewController {
                 }
             }
         }
+    }
+}
+
+extension FollowersListViewController: FollowerListVCDelegate {
+    func didRequestFollowers(username: String) {
+        self.username = username
+        self.title = username
+        self.page = 1
+        followersList.removeAll()
+        filteredFollowers.removeAll()
+        // scroll of the top when new user send to FollowersListVC
+        collectionView.setContentOffset(.zero, animated: true)
+        getFollowers(username: username, page: page)
     }
 }
 

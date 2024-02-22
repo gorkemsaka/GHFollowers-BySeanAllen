@@ -8,7 +8,6 @@
 import UIKit
 
 class GFItemInfoViewController: UIViewController {
-    
     //MARK: - UI Elements
     let stackView = UIStackView()
     let itemInfoView1 = GFItemInfoView()
@@ -17,6 +16,7 @@ class GFItemInfoViewController: UIViewController {
     
     //MARK: - Properties
     var user: User!
+    weak var delegate: UserInfoVCDelegate!
     
     //MARK: - Life Cycyle
     init(user: User) {
@@ -38,7 +38,19 @@ class GFItemInfoViewController: UIViewController {
         configureBackground()
         configureUIElements()
         configureStackView()
+        configureActionButton()
     }
+}
+
+//MARK: - Configure Action Button
+extension GFItemInfoViewController {
+    private func configureActionButton() {
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+    }
+    
+   @objc  func actionButtonTapped(){
+       // there is no action, because subclasses will override this func and they use it custom
+   }
 }
 
 //MARK: - Configure Stack View
@@ -51,7 +63,6 @@ extension GFItemInfoViewController {
         stackView.addArrangedSubview(itemInfoView2)
     }
 }
-
 
 //MARK: - Configure Background of Screen & Constraints
 extension GFItemInfoViewController {

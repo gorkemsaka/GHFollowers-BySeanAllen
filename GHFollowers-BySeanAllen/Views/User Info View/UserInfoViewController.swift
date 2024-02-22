@@ -7,8 +7,11 @@
 
 import UIKit
 
+protocol UserInfoVCDelegate: class {
+    func didTapGithubProfile(user: User)
+    func didTapGetFollowers(user: User)
+}
 class UserInfoViewController: UIViewController {
-
     //MARK: - UI Elements
     let headerView = UIView()
     let itemView1 = UIView()
@@ -17,6 +20,7 @@ class UserInfoViewController: UIViewController {
     
     //MARK: - Properties
     var username: String!
+    weak var delegate: FollowerListVCDelegate!
     
     //MARK: - Life Cycyle
     override func viewDidLoad() {
@@ -33,6 +37,19 @@ class UserInfoViewController: UIViewController {
     }
 }
 
+//MARK: - Configure Navigation Bar and Dismiss UserInfo
+extension UserInfoViewController {
+    private func configureBarbuttonItem(){
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    @objc func dismissVC(){
+        dismiss(animated: true)
+    }
+}
+
+
 //MARK: - Network Call
 extension UserInfoViewController {
     private func getData(){
@@ -41,16 +58,43 @@ extension UserInfoViewController {
             
             switch result {
             case .success(let user) :
-                DispatchQueue.main.async {
-                    self.addVCToContainer(childVC: GFUserInfoHeaderViewController(user: user), containerView: self.headerView)
-                    self.addVCToContainer(childVC: GFRepoItemVC(user: user), containerView: self.itemView1)
-                    self.addVCToContainer(childVC: GFFollowerItemVC(user: user), containerView: self.itemView2)
-                    self.dateLabel.text = "Github since \(user.createdAt.convertToDisplayFormat())"
-                }
+                DispatchQueue.main.async { self.configureUIElements(user: user) }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
             }
         }
+    }
+    
+    private func configureUIElements(user: User) {
+        let repoItemVC = GFRepoItemVC(user: user)
+        repoItemVC.delegate = self
+        let followerItemVC = GFFollowerItemVC(user: user)
+        followerItemVC.delegate = self
+        
+        self.addVCToContainer(childVC: GFUserInfoHeaderViewController(user: user), containerView: self.headerView)
+        self.addVCToContainer(childVC: repoItemVC, containerView: self.itemView1)
+        self.addVCToContainer(childVC: followerItemVC, containerView: self.itemView2)
+        self.dateLabel.text = "Github user since \(user.createdAt.convertToDisplayFormat())"
+    }
+}
+
+//MARK: - Button Tapping
+extension UserInfoViewController: UserInfoVCDelegate {
+    func didTapGithubProfile(user: User) {
+        guard let url = URL(string: user.htmlUrl) else {
+            presentGFAlertOnMainThread(title: "Invalid URL", bodyTitle: "The url attached to this user is invalid", buttonTitle: "Ok")
+            return
+        }
+        presentSafariVC(url: url)
+    }
+    
+    func didTapGetFollowers(user: User) {
+        guard user.followers != 0 else {
+            presentGFAlertOnMainThread(title: "No Followers", bodyTitle: "This user has no followers", buttonTitle: "So Sad")
+            return
+        }
+        delegate.didRequestFollowers(username: user.login)
+        dismissVC()
     }
 }
 
@@ -101,14 +145,3 @@ extension UserInfoViewController {
     }
 }
 
-//MARK: - Configure Navigation Bar and Dismiss UserInfo
-extension UserInfoViewController {
-    private func configureBarbuttonItem(){
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
-        navigationItem.rightBarButtonItem = doneButton
-    }
-    
-    @objc func dismissVC(){
-        dismiss(animated: true)
-    }
-}
