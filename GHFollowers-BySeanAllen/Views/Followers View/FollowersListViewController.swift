@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol FollowerListVCDelegate: class {
+protocol FollowerListVCDelegate: AnyObject {
     func didRequestFollowers(username: String)
 }
 
@@ -41,8 +41,7 @@ class FollowersListViewController: UIViewController {
 
     //MARK: - Functions
     private func configure(){
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
+        configureViewController()
         configureCollectionView()
         configureDataSource()
         getFollowers(username: username, page: page)
@@ -50,6 +49,20 @@ class FollowersListViewController: UIViewController {
     }
 }
 
+//MARK: - Configure ViewController & Navigaton Bar  
+extension FollowersListViewController {
+    private func configureViewController(){
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc func addButtonTapped(){
+        print("add button tapped")
+    }
+}
 //MARK: - Search Controller & CollectionView didSelected
 extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func configureSearchController() {
@@ -126,6 +139,7 @@ extension FollowersListViewController {
     }
 }
 
+//MARK: - Refresh Screen with new username come from UserInfoVC didTapGetFollowers
 extension FollowersListViewController: FollowerListVCDelegate {
     func didRequestFollowers(username: String) {
         self.username = username
@@ -134,7 +148,7 @@ extension FollowersListViewController: FollowerListVCDelegate {
         followersList.removeAll()
         filteredFollowers.removeAll()
         // scroll of the top when new user send to FollowersListVC
-        collectionView.setContentOffset(.zero, animated: true)
+        // collectionView.setContentOffset(.zero, animated: true)
         getFollowers(username: username, page: page)
     }
 }

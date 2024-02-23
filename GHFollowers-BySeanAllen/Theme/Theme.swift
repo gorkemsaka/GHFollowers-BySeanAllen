@@ -22,6 +22,7 @@ struct Theme {
         case requestErrorTitle = "Unable to complete your request. Please check your internet connection"
         case responseErrorTtitle = "Invalid response from the server. Please try again."
         case dataErrorTitle = "The data received from the server was invalid. Please try again."
+        case unableToFavorite = "There was an error when add favorite on this user. Please try again."
     }
     enum SFSymbols{
         static let location = "mappin.and.ellipse"

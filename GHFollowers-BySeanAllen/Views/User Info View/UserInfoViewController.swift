@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol UserInfoVCDelegate: class {
+protocol UserInfoVCDelegate: AnyObject {
     func didTapGithubProfile(user: User)
     func didTapGetFollowers(user: User)
 }
@@ -93,7 +93,7 @@ extension UserInfoViewController: UserInfoVCDelegate {
             presentGFAlertOnMainThread(title: "No Followers", bodyTitle: "This user has no followers", buttonTitle: "So Sad")
             return
         }
-        delegate.didRequestFollowers(username: user.login)
+        delegate.didRequestFollowers(username: username)
         dismissVC()
     }
 }

@@ -49,7 +49,7 @@ extension GFItemInfoViewController {
     }
     
    @objc  func actionButtonTapped(){
-       // there is no action, because subclasses will override this func and they use it custom
+       // there is no action, because subclasses will override this func and they will customize it
    }
 }
 
