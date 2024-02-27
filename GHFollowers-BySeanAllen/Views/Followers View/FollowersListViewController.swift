@@ -59,10 +59,34 @@ extension FollowersListViewController {
         navigationItem.rightBarButtonItem = addButton
     }
     
+    //MARK: - 9:48 Persistence Setup must watch again n again
     @objc func addButtonTapped(){
-        print("add button tapped")
+      showLoadingView()
+        NetworkManager.shared.fetchUser(username: username) { [weak self] result in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            
+            switch result {
+            case .success(let user):
+                let favorite = Followers(login: user.login, avatarUrl: user.avatarUrl)
+                PersistenceManager.updateFavorites(favorite: favorite, actionType: .add) { [weak self] error in
+                    guard let self = self else { return }
+                    
+                    guard let error = error else {
+                        self.presentGFAlertOnMainThread(title: "Succes", bodyTitle: "User added to favorite 🎉", buttonTitle: "Hooray!")
+                        return
+                    }
+                    
+                    self.presentGFAlertOnMainThread(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
+                }
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "Something Went Wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
+            }
+        }
     }
 }
+
+
 //MARK: - Search Controller & CollectionView didSelected
 extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func configureSearchController() {
@@ -167,7 +191,7 @@ extension FollowersListViewController {
     private func configureDataSource(){
         dataSource = UICollectionViewDiffableDataSource<Section, Followers>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Theme.Identifier.followerCellID.rawValue, for: indexPath) as! FollowersCollectionViewCell
-            cell.getData(model: follower)
+            cell.getFollowersData(follower: follower)
             return cell
         })
     }

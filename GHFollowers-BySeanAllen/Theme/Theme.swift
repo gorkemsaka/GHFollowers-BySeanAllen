@@ -23,6 +23,7 @@ struct Theme {
         case responseErrorTtitle = "Invalid response from the server. Please try again."
         case dataErrorTitle = "The data received from the server was invalid. Please try again."
         case unableToFavorite = "There was an error when add favorite on this user. Please try again."
+        case alreadyInFavorites = "You've already favorited this user."
     }
     enum SFSymbols{
         static let location = "mappin.and.ellipse"
@@ -37,6 +38,7 @@ struct Theme {
     }
     enum Identifier: String {
         case followerCellID = "FollowerCell"
+        case favoritesCellID = "FavoritesCell"
     }
     enum Size: CGFloat {
         case cornerRadius = 10

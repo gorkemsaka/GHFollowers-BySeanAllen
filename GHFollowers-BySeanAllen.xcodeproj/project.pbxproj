@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500AAEF52B8CB09D009C7B3B /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500AAEF42B8CB09D009C7B3B /* FavoritesTableViewCell.swift */; };
 		50127EFC2B849EEC005AEFB9 /* GFItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50127EFB2B849EEC005AEFB9 /* GFItemInfoViewController.swift */; };
 		50127EFE2B84ACD3005AEFB9 /* GFRepoItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50127EFD2B84ACD3005AEFB9 /* GFRepoItemVC.swift */; };
 		50127F002B84AEF1005AEFB9 /* GFFollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50127EFF2B84AEF1005AEFB9 /* GFFollowerItemVC.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		500AAEF42B8CB09D009C7B3B /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		50127EFB2B849EEC005AEFB9 /* GFItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoViewController.swift; sourceTree = "<group>"; };
 		50127EFD2B84ACD3005AEFB9 /* GFRepoItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFRepoItemVC.swift; sourceTree = "<group>"; };
 		50127EFF2B84AEF1005AEFB9 /* GFFollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerItemVC.swift; sourceTree = "<group>"; };
@@ -87,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500AAEF12B8CB036009C7B3B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				500AAEF42B8CB09D009C7B3B /* FavoritesTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		5019EC0F2B69137B00BEAAEB = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +169,7 @@
 		5019EC362B69266B00BEAAEB /* Favorites View */ = {
 			isa = PBXGroup;
 			children = (
+				500AAEF12B8CB036009C7B3B /* Cell */,
 				5019EC372B69268500BEAAEB /* FavoritesViewController.swift */,
 			);
 			path = "Favorites View";
@@ -405,6 +416,7 @@
 				50A1D17E2B8931CD00309273 /* PersistenceManager.swift in Sources */,
 				50E122172B84E0B400E837CB /* String+Ext.swift in Sources */,
 				5019EC1E2B69137B00BEAAEB /* SceneDelegate.swift in Sources */,
+				500AAEF52B8CB09D009C7B3B /* FavoritesTableViewCell.swift in Sources */,
 				5043E1B82B6BA60800D81EAA /* NetworkManager.swift in Sources */,
 				507896E72B7FA39E00F56163 /* UserInfoViewController.swift in Sources */,
 				5019EC402B69439F00BEAAEB /* GFTextField.swift in Sources */,

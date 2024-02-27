@@ -32,9 +32,9 @@ class FollowersCollectionViewCell: UICollectionViewCell {
 
 //MARK: - Get UI Elements Data
 extension FollowersCollectionViewCell {
-    func getData(model: Followers) {
-        usernameLabel.text = model.login
-        avatarImageView.downloadImage(urlString: model.avatarUrl)
+    func getFollowersData(follower: Followers) {
+        usernameLabel.text = follower.login
+        avatarImageView.downloadImage(urlString: follower.avatarUrl)
     }
 }
 

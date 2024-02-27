@@ -11,6 +11,7 @@ class GFAvatarImageView: UIImageView {
     //MARK: - Properties
     private let placeholderImage = UIImage(named: "avatar-placeholder")!
     let cache = NetworkManager.shared.cache
+    
     //MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
