@@ -12,15 +12,17 @@ class SearchViewController: UIViewController {
     let logoImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "gh-logo")
+        image.image = Theme.Images.ghLogo
         return image
     }()
     let userNameTextField = GFTextField()
     let actionButton = GFButton(backgroundColor: .systemGreen, title: Theme.AppTitle.getFollowersButton.rawValue)
     
     //MARK: - Properties
+    var logoImageViewTopConstraint: NSLayoutConstraint!
     // text validation for using userName
     var isUsernameEntered: Bool { return !userNameTextField.text!.isEmpty}
+    
     
     //MARK: - Life Cycyle
     override func viewDidLoad() {
@@ -43,7 +45,7 @@ class SearchViewController: UIViewController {
     }
     
     private func createDismissKeyboardTapGesture(){
-        let tap = UITapGestureRecognizer(target: view.self, action: #selector(UIView.endEditing))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
     }
 }
@@ -75,8 +77,13 @@ extension SearchViewController: UITextFieldDelegate {
 extension SearchViewController {
     private func configureLogoImageView(){
         view.addSubview(logoImageView)
+        // if the device is iphoneSE or iphone8Zoomed, const will be 20 otherwise gonna be 80
+        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
+        
+        // logoImageView's top anchor constant is dynamic. Thats why top anchor isn't on NSLayoutConstraint.activate
+        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
+        logoImageViewTopConstraint.isActive = true
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 200),
             logoImageView.widthAnchor.constraint(equalToConstant: 200)

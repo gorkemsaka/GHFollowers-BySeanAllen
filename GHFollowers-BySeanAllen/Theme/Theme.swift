@@ -5,7 +5,7 @@
 //  Created by Gorkem Saka on 30.01.2024.
 //
 
-import Foundation
+import UIKit
 
 struct Theme {
     enum AppTitle: String {
@@ -31,6 +31,9 @@ struct Theme {
         static let gist = "text.alignleft"
         static let followers = "heart"
         static let following = "person.2"
+    }
+    enum Images {
+        static let ghLogo = UIImage(named: "gh-logo")
     }
     enum GFItems: String {
         case repoItem = "Github Profile"
