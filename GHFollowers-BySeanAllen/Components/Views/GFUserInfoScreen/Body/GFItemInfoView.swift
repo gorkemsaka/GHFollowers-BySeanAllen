@@ -40,16 +40,16 @@ extension GFItemInfoView {
     func setElements(itemInfoType: ItemInfoType, count: Int){
         switch itemInfoType {
         case .repos:
-            symbolImageView.image = UIImage(systemName: Theme.SFSymbols.repos)
+            symbolImageView.image = Theme.SFSymbols.repos
             titleLabel.text = "Public Repos"
         case .gists:
-            symbolImageView.image = UIImage(systemName: Theme.SFSymbols.gist)
+            symbolImageView.image = Theme.SFSymbols.gist
             titleLabel.text = "Public Gist"
         case .followers:
-            symbolImageView.image = UIImage(systemName: Theme.SFSymbols.followers)
+            symbolImageView.image = Theme.SFSymbols.followers
             titleLabel.text = "Public Followers"
         case .following:
-            symbolImageView.image = UIImage(systemName: Theme.SFSymbols.following)
+            symbolImageView.image = Theme.SFSymbols.following
             titleLabel.text = "Public Following"
         }
         countLabel.text = String(count)

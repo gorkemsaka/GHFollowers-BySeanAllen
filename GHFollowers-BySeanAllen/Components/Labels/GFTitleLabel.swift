@@ -18,17 +18,17 @@ class GFTitleLabel: UILabel {
     }
     
     
-    init(textAlignment: NSTextAlignment, fontSize: CGFloat){
-        super.init(frame: .zero)
+    convenience init(textAlignment: NSTextAlignment, fontSize: CGFloat){
+        self.init(frame: .zero)
         self.textAlignment = textAlignment
         self.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
-        configure()
     }
+    
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
         textColor = .label
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
-        lineBreakMode = .byTruncatingTail 
+        lineBreakMode = .byTruncatingTail
     }
 }

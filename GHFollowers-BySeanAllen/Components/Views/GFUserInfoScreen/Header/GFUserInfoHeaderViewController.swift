@@ -45,16 +45,26 @@ class GFUserInfoHeaderViewController: UIViewController {
 //MARK: - Configure User Data for UI Elements
 extension GFUserInfoHeaderViewController {
     private func configureUIElements(){
-        avatarImageView.downloadImage(urlString: user.avatarUrl)
+        downloadAvatarImage()
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? ""
         locationLabel.text = user.location ?? "No Location Found"
         bioLabel.text = user.bio  ?? "No Bio Avaliable"
         bioLabel.numberOfLines = 3
         
-        locationImageView.image = UIImage(systemName: Theme.SFSymbols.location)
+        locationImageView.image = Theme.SFSymbols.location
         locationImageView.tintColor = .secondaryLabel
     }
+    
+    private func downloadAvatarImage(){
+        NetworkManager.shared.downloadImage(urlString: user.avatarUrl) { [weak self] image in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.avatarImageView.image = image
+            }
+        }
+    }
+    
 }
 
 

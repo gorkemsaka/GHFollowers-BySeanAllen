@@ -182,7 +182,7 @@ extension FollowersListViewController: FollowerListVCDelegate {
         followersList.removeAll()
         filteredFollowers.removeAll()
         // scroll of the top when new user send to FollowersListVC
-        // collectionView.setContentOffset(.zero, animated: true)
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
         getFollowers(username: username, page: page)
     }
 }

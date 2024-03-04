@@ -37,8 +37,8 @@ extension UIViewController {
         activtyIndicatior.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            activtyIndicatior.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            activtyIndicatior.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            activtyIndicatior.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            activtyIndicatior.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
         
         activtyIndicatior.startAnimating()

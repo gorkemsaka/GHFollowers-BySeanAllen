@@ -18,11 +18,11 @@ class GFSecondaryTitleLabel: UILabel {
     }
     
     
-    init(fontSize: CGFloat){
-        super.init(frame: .zero)
+    convenience init(fontSize: CGFloat){
+        self.init(frame: .zero)
         self.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
-        configure()
     }
+    
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
         textColor = .secondaryLabel

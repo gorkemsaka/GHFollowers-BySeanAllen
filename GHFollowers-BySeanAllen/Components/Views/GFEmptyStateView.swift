@@ -22,10 +22,9 @@ class GFEmptyStateView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(message: String) {
-        super.init(frame: .zero)
+    convenience init(message: String) {
+        self.init(frame: .zero)
         messageLabel.text = message
-        configure()
     }
     
     //MARK: - Functions
@@ -36,11 +35,18 @@ class GFEmptyStateView: UIView {
         messageLabel.numberOfLines = 3
         messageLabel.textColor = .secondaryLabel
         
-        emptyImageView.image = UIImage(named: "empty-state-logo")
+        emptyImageView.image = Theme.Images.emptyStateLogo
         emptyImageView.translatesAutoresizingMaskIntoConstraints = false
         
+        let labelCenterYConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ?  -80 : -150
+        let messageLabelCenterYConstraint = messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: labelCenterYConstant)
+        messageLabelCenterYConstraint.isActive = true
+        
+        let logoBottomConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ?  80 : 40
+        let logoImageViewBottomConstraints = emptyImageView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: logoBottomConstant)
+        logoImageViewBottomConstraints.isActive = true
+        
         NSLayoutConstraint.activate([
-            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -150),
             messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
             messageLabel.heightAnchor.constraint(equalToConstant: 200),
@@ -50,7 +56,6 @@ class GFEmptyStateView: UIView {
             emptyImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
             // pushing image to the right for good view
             emptyImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 200),
-            emptyImageView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 40)
         ])
     }
 }
