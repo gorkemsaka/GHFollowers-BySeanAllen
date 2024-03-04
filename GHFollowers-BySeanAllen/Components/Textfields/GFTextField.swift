@@ -36,6 +36,8 @@ class GFTextField: UITextField {
         autocorrectionType = .no
         keyboardType = .namePhonePad
         returnKeyType = .go
+        //little clear button on the textfield
+        clearButtonMode = .whileEditing
         
         placeholder = Theme.AppTitle.textFieldPlaceHolder.rawValue
     }

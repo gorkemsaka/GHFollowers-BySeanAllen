@@ -20,7 +20,7 @@ class FavoritesViewController: UIViewController {
         configure()
     }
     
-    // viewDidLoad gonna run once, but favorites can change meanwhile app working. Everytime that vc shows up, viewWillAppear will run. Thats why getFavorites in there
+    // viewDidLoad is running once, but favorites can change meanwhile app working. Everytime that vc shows up, viewWillAppear will run. Thats why getFavorites in there
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getFavorites()
@@ -93,7 +93,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorite = favorites[indexPath.row]
-        let destVC = FollowersListViewController()
+        let destVC = FollowersListViewController(username: favorite.login)
         destVC.username = favorite.login
         destVC.title = favorite.login
         

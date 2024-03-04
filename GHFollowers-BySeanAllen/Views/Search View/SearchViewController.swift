@@ -32,6 +32,8 @@ class SearchViewController: UIViewController {
     // Everytime the view appear, this func will work
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // everytime searchVC open back, textfield's text gonna be cleaned
+        userNameTextField.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -57,9 +59,10 @@ extension SearchViewController {
             presentGFAlertOnMainThread(title: Theme.GFError.alertTitle.rawValue, bodyTitle: Theme.GFError.alertBodyTitle.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
             return
         }
-        let followersListVC = FollowersListViewController()
-        followersListVC.username = userNameTextField.text
-        followersListVC.title = followersListVC.username
+        
+        // when slide back to followerListVC to searchVC, keyboard doesn't show anymore
+        userNameTextField.resignFirstResponder()
+        let followersListVC = FollowersListViewController(username: userNameTextField.text!)
         navigationController?.pushViewController(followersListVC, animated: true)
     }
 }
