@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ItemInfoVCDelegate: AnyObject {
+    func didTapGithubProfile(user: User)
+    func didTapGetFollowers(user: User)
+}
+
 class GFItemInfoViewController: UIViewController {
     //MARK: - UI Elements
     let stackView = UIStackView()
@@ -16,7 +21,7 @@ class GFItemInfoViewController: UIViewController {
     
     //MARK: - Properties
     var user: User!
-    weak var delegate: UserInfoVCDelegate!
+    weak var delegate: ItemInfoVCDelegate!
     
     //MARK: - Life Cycyle
     init(user: User) {

@@ -8,9 +8,9 @@
 import UIKit
 
 protocol UserInfoVCDelegate: AnyObject {
-    func didTapGithubProfile(user: User)
-    func didTapGetFollowers(user: User)
+    func didRequestFollowers(username: String)
 }
+
 class UserInfoViewController: UIViewController {
     //MARK: - UI Elements
     let headerView = UIView()
@@ -20,7 +20,7 @@ class UserInfoViewController: UIViewController {
     
     //MARK: - Properties
     var username: String!
-    weak var delegate: FollowerListVCDelegate!
+    weak var delegate: UserInfoVCDelegate!
     
     //MARK: - Life Cycyle
     override func viewDidLoad() {
@@ -79,7 +79,7 @@ extension UserInfoViewController {
 }
 
 //MARK: - Button Tapping
-extension UserInfoViewController: UserInfoVCDelegate {
+extension UserInfoViewController: ItemInfoVCDelegate {
     func didTapGithubProfile(user: User) {
         guard let url = URL(string: user.htmlUrl) else {
             presentGFAlertOnMainThread(title: "Invalid URL", bodyTitle: "The url attached to this user is invalid", buttonTitle: "Ok")
@@ -133,7 +133,7 @@ extension UserInfoViewController {
             dateLabel.topAnchor.constraint(equalTo: itemView2.bottomAnchor, constant: padding),
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            dateLabel.heightAnchor.constraint(equalToConstant: 18)
+            dateLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     

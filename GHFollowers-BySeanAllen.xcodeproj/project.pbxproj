@@ -244,8 +244,8 @@
 		50621B292B7E3C2200227B23 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
-				502993FA2B6A9A57001EDBFD /* GFBodyLabel.swift */,
 				502993F82B6A98FF001EDBFD /* GFTitleLabel.swift */,
+				502993FA2B6A9A57001EDBFD /* GFBodyLabel.swift */,
 				509B48722B83597C00E37C38 /* GFSecondaryTitleLabel.swift */,
 			);
 			path = Labels;

@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol FollowerListVCDelegate: AnyObject {
-    func didRequestFollowers(username: String)
-}
-
 class FollowersListViewController: UIViewController {
     //MARK: - Section for snapshot
     enum Section {
@@ -174,7 +170,7 @@ extension FollowersListViewController {
 }
 
 //MARK: - Refresh Screen with new username come from UserInfoVC didTapGetFollowers
-extension FollowersListViewController: FollowerListVCDelegate {
+extension FollowersListViewController: UserInfoVCDelegate {
     func didRequestFollowers(username: String) {
         self.username = username
         self.title = username
