@@ -19,7 +19,6 @@ class SearchViewController: UIViewController {
     let actionButton = GFButton(backgroundColor: .systemGreen, title: Theme.AppTitle.getFollowersButton.rawValue)
     
     //MARK: - Properties
-    var logoImageViewTopConstraint: NSLayoutConstraint!
     // text validation for using userName
     var isUsernameEntered: Bool { return !userNameTextField.text!.isEmpty}
     
@@ -83,10 +82,8 @@ extension SearchViewController {
         // if the device is iphoneSE or iphone8Zoomed, const will be 20 otherwise gonna be 80
         let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
         
-        // logoImageView's top anchor constant is dynamic. Thats why top anchor isn't on NSLayoutConstraint.activate
-        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
-        logoImageViewTopConstraint.isActive = true
         NSLayoutConstraint.activate([
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 200),
             logoImageView.widthAnchor.constraint(equalToConstant: 200)

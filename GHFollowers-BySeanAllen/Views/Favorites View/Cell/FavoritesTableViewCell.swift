@@ -31,13 +31,7 @@ class FavoritesTableViewCell: UITableViewCell {
 extension FavoritesTableViewCell {
     func getData(favorite: Followers) {
         usernameLabel.text = favorite.login
-        
-        NetworkManager.shared.downloadImage(urlString: favorite.avatarUrl) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.avatarImageView.image = image
-            }
-        }
+        avatarImageView.downloadImage(url: favorite.avatarUrl)
     }
 }
 

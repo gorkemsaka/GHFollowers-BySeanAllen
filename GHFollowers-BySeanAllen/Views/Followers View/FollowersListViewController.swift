@@ -74,20 +74,25 @@ extension FollowersListViewController {
             
             switch result {
             case .success(let user):
-                let favorite = Followers(login: user.login, avatarUrl: user.avatarUrl)
-                PersistenceManager.updateFavorites(favorite: favorite, actionType: .add) { [weak self] error in
-                    guard let self = self else { return }
-                    
-                    guard let error = error else {
-                        self.presentGFAlertOnMainThread(title: "Succes", bodyTitle: "User added to favorite 🎉", buttonTitle: "Hooray!")
-                        return
-                    }
-                    
-                    self.presentGFAlertOnMainThread(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
-                }
+                addUserToFavorites(user: user)
+                
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something Went Wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
             }
+        }
+    }
+    
+    func addUserToFavorites(user: User){
+        let favorite = Followers(login: user.login, avatarUrl: user.avatarUrl)
+        PersistenceManager.updateFavorites(favorite: favorite, actionType: .add) { [weak self] error in
+            guard let self = self else { return }
+            
+            guard let error = error else {
+                self.presentGFAlertOnMainThread(title: "Succes", bodyTitle: "User added to favorite 🎉", buttonTitle: "Hooray!")
+                return
+            }
+            
+            self.presentGFAlertOnMainThread(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
         }
     }
 }
@@ -147,16 +152,7 @@ extension FollowersListViewController {
             dismissLoadingView()
             switch result {
             case .success(let followers):
-                if followers.count < 100 { self.hasMoreFollowers = false } // customer has another 100 followers or not
-                self.followersList.append(contentsOf: followers)
-                
-                if self.followersList.isEmpty {
-                    let message = "This user doesn't have any followers. Go Follow Them 😄"
-                    DispatchQueue.main.async { self.showEmptyStateView(message: message, view: self.view) } // using .view thats should be in main thread
-                    return
-                }
-                
-                self.updateData(followersList: self.followersList)
+                updateUI(followers: followers)
                 
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", bodyTitle: error.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
@@ -166,6 +162,19 @@ extension FollowersListViewController {
                 }
             }
         }
+    }
+    
+    func updateUI(followers: [Followers]){
+        if followers.count < 100 { self.hasMoreFollowers = false } // customer has another 100 followers or not
+        self.followersList.append(contentsOf: followers)
+        
+        if self.followersList.isEmpty {
+            let message = "This user doesn't have any followers. Go Follow Them 😄"
+            DispatchQueue.main.async { self.showEmptyStateView(message: message, view: self.view) } // using .view thats should be in main thread
+            return
+        }
+        
+        self.updateData(followersList: self.followersList)
     }
 }
 

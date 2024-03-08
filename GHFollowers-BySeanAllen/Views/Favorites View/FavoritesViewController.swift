@@ -51,7 +51,6 @@ extension FavoritesViewController {
             
             switch result {
             case .success(let favorites):
-                
                 if favorites.isEmpty {
                     showEmptyStateView(message: "No Favorites?\nAdd one on the follower screen", view: self.view)
                 } else {
@@ -105,7 +104,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     // for delete action
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-
         PersistenceManager.updateFavorites(favorite: favorites[indexPath.row], actionType: .remove) { [weak self] error in
             guard let self = self else { return }
             guard let error = error else { 
