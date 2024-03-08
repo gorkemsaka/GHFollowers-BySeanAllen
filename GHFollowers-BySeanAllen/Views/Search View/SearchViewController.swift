@@ -16,7 +16,7 @@ class SearchViewController: UIViewController {
         return image
     }()
     let userNameTextField = GFTextField()
-    let actionButton = GFButton(backgroundColor: .systemGreen, title: Theme.AppTitle.getFollowersButton.rawValue)
+    let actionButton = GFButton(color: .systemGreen, title: Theme.AppTitle.getFollowersButton.rawValue, systemImageName: "person.3")
     
     //MARK: - Properties
     // text validation for using userName

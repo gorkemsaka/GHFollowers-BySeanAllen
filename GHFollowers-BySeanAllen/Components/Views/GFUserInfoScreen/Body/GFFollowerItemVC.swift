@@ -17,7 +17,7 @@ class GFFollowerItemVC: GFItemInfoViewController {
     private func configureItems(){
         itemInfoView1.setElements(itemInfoType: .followers, count: user.followers)
         itemInfoView2.setElements(itemInfoType: .following, count: user.following)
-        actionButton.setButton(backgroundColor: .systemGreen, title: Theme.GFItems.followerItem.rawValue)
+        actionButton.setButton(color: .systemGreen, title: Theme.GFItems.followerItem.rawValue, systemImageName: "person.3")
     }
     
     override func actionButtonTapped() {

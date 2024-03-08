@@ -17,7 +17,7 @@ class GFRepoItemVC: GFItemInfoViewController {
     private func configureItems(){
         itemInfoView1.setElements(itemInfoType: .repos, count: user.publicRepos)
         itemInfoView2.setElements(itemInfoType: .gists, count: user.publicGists)
-        actionButton.setButton(backgroundColor: .systemPurple, title: Theme.GFItems.repoItem.rawValue )
+        actionButton.setButton(color: .systemPurple, title: Theme.GFItems.repoItem.rawValue, systemImageName: "person.3" )
     }
     
     override func actionButtonTapped() {
