@@ -12,14 +12,20 @@ import SafariServices
 fileprivate var containerView: UIView!
 
 extension UIViewController {
-    //Alert
-    func presentGFAlertOnMainThread(title: String, bodyTitle: String, buttonTitle: String){
-        DispatchQueue.main.async {
-                    let alertVC = GFAlertViewController(alertTitle: title, bodyTitle: bodyTitle, buttonTitle: buttonTitle)
-                    alertVC.modalPresentationStyle = .overFullScreen
-                    alertVC.modalTransitionStyle = .crossDissolve
-                    self.present(alertVC, animated: true)
-                }
+    func presentGFAlert(title: String, bodyTitle: String, buttonTitle: String){
+        let alertVC = GFAlertViewController(alertTitle: title, bodyTitle: bodyTitle, buttonTitle: buttonTitle)
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        self.present(alertVC, animated: true)
+    }
+    
+    func presentDefaultError(){
+        let alertVC = GFAlertViewController(alertTitle: "Something Went Wrong",
+                                            bodyTitle: "Unable to complete your task at this time.",
+                                            buttonTitle: "OK")
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        self.present(alertVC, animated: true)
     }
     
     // Start Activity Indicator
@@ -55,8 +61,8 @@ extension UIViewController {
     // Show Empty State View
     func showEmptyStateView(message: String, view: UIView) {
         let emptyStateView = GFEmptyStateView(message: message)
-            emptyStateView.frame = view.bounds
-            view.addSubview(emptyStateView)
+        emptyStateView.frame = view.bounds
+        view.addSubview(emptyStateView)
     }
     
     // Show SafariVC for webviews

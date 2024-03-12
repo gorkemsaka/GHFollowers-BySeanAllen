@@ -44,7 +44,7 @@ class FollowersListViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
+    
     //MARK: - Functions
     private func configure(){
         configureViewController()
@@ -55,7 +55,7 @@ class FollowersListViewController: UIViewController {
     }
 }
 
-//MARK: - Configure ViewController & Navigaton Bar  
+//MARK: - Configure ViewController & Navigaton Bar
 extension FollowersListViewController {
     private func configureViewController(){
         view.backgroundColor = .systemBackground
@@ -67,19 +67,34 @@ extension FollowersListViewController {
     
     //MARK: - 9:48 Persistence Setup must watch again n again
     @objc func addButtonTapped(){
-      showLoadingView()
-        NetworkManager.shared.fetchUser(username: username) { [weak self] result in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let user):
+        showLoadingView()
+        Task {
+            do {
+                let user = try await NetworkManager.shared.fetchUser(username: username)
                 addUserToFavorites(user: user)
-                
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Something Went Wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
+                dismissLoadingView()
+            } catch {
+                if let GFError = error as? Theme.GFError {
+                    presentGFAlert(title: "Something Went Wrong", bodyTitle: GFError.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
+                }
+                dismissLoadingView()
             }
         }
+        
+        //        NetworkManager.shared.fetchUser(username: username) { [weak self] result in
+        //            guard let self = self else { return }
+        //            self.dismissLoadingView()
+        //
+        //            switch result {
+        //            case .success(let user):
+        //                addUserToFavorites(user: user)
+        //
+        //            case .failure(let error):
+        //                self.presentGFAlertOnMainThread(title: "Something Went Wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
+        //            }
+        //        }
     }
     
     func addUserToFavorites(user: User){
@@ -88,11 +103,14 @@ extension FollowersListViewController {
             guard let self = self else { return }
             
             guard let error = error else {
-                self.presentGFAlertOnMainThread(title: "Succes", bodyTitle: "User added to favorite 🎉", buttonTitle: "Hooray!")
+                DispatchQueue.main.async {
+                    self.presentGFAlert(title: "Succes", bodyTitle: "User added to favorite 🎉", buttonTitle: "Hooray!")
+                }
                 return
             }
-            
-            self.presentGFAlertOnMainThread(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
+            DispatchQueue.main.async {
+                self.presentGFAlert(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
+            }
         }
     }
 }
@@ -145,21 +163,37 @@ extension FollowersListViewController: UISearchResultsUpdating, UISearchBarDeleg
 
 //MARK: - Fetch Data
 extension FollowersListViewController {
-     func getFollowers(username: String, page: Int){
-     showLoadingView()
-        NetworkManager.shared.fetchFollowers(username: username, page: page) { [weak self] result in
-            guard let self = self else { return }
-            dismissLoadingView()
-            switch result {
-            case .success(let followers):
+    func getFollowers(username: String, page: Int) {
+        showLoadingView()
+        
+        //        NetworkManager.shared.fetchFollowers(username: username, page: page) { [weak self] result in
+        //            guard let self = self else { return }
+        //            dismissLoadingView()
+        //            switch result {
+        //            case .success(let followers):
+        //                updateUI(followers: followers)
+        //
+        //            case .failure(let error):
+        //                self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", bodyTitle: error.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
+        //                // Go back to searchVC if username doesn't exist
+        //                DispatchQueue.main.async {
+        //                    self.navigationController?.popViewController(animated: true)
+        //                }
+        //            }
+        //        }
+        
+        Task {
+            do {
+                let followers = try await NetworkManager.shared.fetchFollowers(username: username, page: page)
                 updateUI(followers: followers)
-                
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", bodyTitle: error.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
-                // Go back to searchVC if username doesn't exist
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
+                dismissLoadingView()
+            } catch {
+                if let GFError = error as? Theme.GFError {
+                    presentGFAlert(title: "Bad Stuff Happened", bodyTitle: GFError.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
+                } else {
+                    presentDefaultError()
                 }
+                dismissLoadingView()
             }
         }
     }
@@ -201,7 +235,7 @@ extension FollowersListViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowersCollectionViewCell.self, forCellWithReuseIdentifier: Theme.Identifier.followerCellID.rawValue)
     }
-     
+    
     // 4:50:20 - UICollectionView - Diffable Data Source by iOS Dev Interview Prep Sean Allen just in case
     private func configureDataSource(){
         dataSource = UICollectionViewDiffableDataSource<Section, Followers>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell in
@@ -224,7 +258,7 @@ extension FollowersListViewController: UICollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offsetY = scrollView.contentOffset.y            // vertical scrollview position height
         let contentHeight = scrollView.contentSize.height   // entire content height of scrollView
-        let screenHeight = scrollView.frame.size.height     // screen height of scrollViewb
+        let screenHeight = scrollView.frame.size.height     // screen height of scrollView
         
         if offsetY > contentHeight - screenHeight {
             guard hasMoreFollowers else { return }
@@ -233,4 +267,4 @@ extension FollowersListViewController: UICollectionViewDelegate {
         }
     }
 }
- 
+

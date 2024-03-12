@@ -55,7 +55,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     @objc func pushFollowersListVC(){
         guard isUsernameEntered else {
-            presentGFAlertOnMainThread(title: Theme.GFError.alertTitle.rawValue, bodyTitle: Theme.GFError.alertBodyTitle.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
+            presentGFAlert(title: Theme.GFError.alertTitle.rawValue, bodyTitle: Theme.GFError.alertBodyTitle.rawValue, buttonTitle: Theme.AppTitle.alertButtonTitle.rawValue)
             return
         }
         

@@ -61,7 +61,9 @@ extension FavoritesViewController {
                     }
                 }
             case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
+                DispatchQueue.main.async {
+                    self.presentGFAlert(title: "Something went wrong", bodyTitle: error.rawValue, buttonTitle: "Ok")
+                }
             }
         }
     }
@@ -106,13 +108,16 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         guard editingStyle == .delete else { return }
         PersistenceManager.updateFavorites(favorite: favorites[indexPath.row], actionType: .remove) { [weak self] error in
             guard let self = self else { return }
-            guard let error = error else { 
+            guard let error = error else {
                 favorites.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
                 return
             }
-            self.presentGFAlertOnMainThread(title: "Unable to remove", bodyTitle: error.rawValue, buttonTitle: "Ok")
+            DispatchQueue.main.async {
+                self.presentGFAlert(title: "Unable to remove", bodyTitle: error.rawValue, buttonTitle: "Ok")
+            }
         }
+        
     }
 }
 
