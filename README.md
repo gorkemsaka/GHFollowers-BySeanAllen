@@ -21,16 +21,14 @@ To clone this project to your local machine, follow these steps:
  git clone https://github.com/gorkemsaka/GHFollowers-BySeanAllen.git
 
 ```
-    
-## Screenshots
+    ## Screenshots
 
 <img src="https://github.com/gorkemsaka/GHFollowers-BySeanAllen/assets/83422730/f4dfad94-09bb-446b-9546-050435cf7ea5" width="400" alt="GHFollowers1">
 <img src="https://github.com/gorkemsaka/GHFollowers-BySeanAllen/assets/83422730/7a6bf086-7249-4b7f-b11a-05083f389a1e" width="400" alt="GHFollowers2">
 <img src="https://github.com/gorkemsaka/GHFollowers-BySeanAllen/assets/83422730/b4a28d87-9564-4677-874b-dce0e3a8140b" width="400" alt="GHFollowers3">
 <img src="https://github.com/gorkemsaka/GHFollowers-BySeanAllen/assets/83422730/f0419290-c40c-4f4b-895b-b124a46d7fea" width="400" alt="GHFollowers4">
 <img src="https://github.com/gorkemsaka/GHFollowers-BySeanAllen/assets/83422730/7fba0a27-3a67-4edb-89d8-5f7380dfdac6" width="400" alt="GHFollowers5">
+
 ## Getting Started
 
  - [Sean Allen iOS Dev Interview Prep - Take Home Project](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
-
-
