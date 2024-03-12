@@ -19,9 +19,8 @@ To clone this project to your local machine, follow these steps:
 
 ```bash
  git clone https://github.com/gorkemsaka/GHFollowers-BySeanAllen.git
-
 ```
-    ## Screenshots
+## Screenshots
 
 <img src="https://github.com/gorkemsaka/GHFollowers-BySeanAllen/assets/83422730/f4dfad94-09bb-446b-9546-050435cf7ea5" width="400" alt="GHFollowers1">
 <img src="https://github.com/gorkemsaka/GHFollowers-BySeanAllen/assets/83422730/7a6bf086-7249-4b7f-b11a-05083f389a1e" width="400" alt="GHFollowers2">
